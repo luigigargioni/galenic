@@ -1,0 +1,42 @@
+[tool.poetry]
+name = "praise"
+version = "0.0.1"
+description = "Chat And Program Industrial Robots through Convenient Interaction"
+authors = ["Luigi Gargioni <luigi.gargioni@gmail.com>"]
+maintainers = ["Luigi Gargioni <luigi.gargioni@gmail.com>"]
+readme = "README.md"
+homepage = "http://localhost:8000/"
+repository = "https://github.com/luigigargioni/galenic"
+documentation = "https://github.com/luigigargioni/galenic#readme"
+packages = [
+    { include="poetry_scripts", from="./backend" },
+]
+
+[tool.poetry.scripts]
+start = "backend.poetry_scripts.server:start"
+collectstatic = "backend.poetry_scripts.server:collectstatic"
+poetryup = "backend.poetry_scripts.server:poetryup"
+migrate = "backend.poetry_scripts.server:migrate"
+makemigrations = "backend.poetry_scripts.server:makemigrations"
+
+[tool.poetry.dependencies]
+django = "^5.0"
+django-cors-headers = "^4.3.1"
+django-mysql = "^4.12.0"
+numpy = "^1.26.2"
+openai = "^1.6.1"
+opencv-python = "^4.8.1.78"
+pillow = "^10.1.0"
+python = "3.11.7"
+python-dotenv = "^1.0.0"
+pytz = "^2023.3.post1"
+pywin32 = "^306"
+
+[tool.poetry.dev-dependencies]
+black = "^23.12.1"
+flake8 = "^6.1.0"
+poetry-plugin-up = "^0.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

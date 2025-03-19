@@ -1,0 +1,11 @@
+.no-handles .react-flow__handle {
+    opacity: 0;
+  }
+
+.circle-group {
+  border-radius: 50%;
+}
+
+.select-color-placeholder {
+  color: #a5a5a4;
+}

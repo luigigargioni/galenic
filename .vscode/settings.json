@@ -1,0 +1,10 @@
+{
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "python.analysis.typeCheckingMode": "off",
+    "prettier.configPath": "frontend/.prettierrc",
+    "prettier.ignorePath": "frontend/.prettierignore",
+}
