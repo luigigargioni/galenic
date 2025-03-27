@@ -10,6 +10,7 @@ export interface ActionType {
   pattern: string
   height: number
   tool: string
+  keywords: string[]
 }
 
 export type ActionDetailType = Omit<ActionType, 'owner' | 'owner__username'>

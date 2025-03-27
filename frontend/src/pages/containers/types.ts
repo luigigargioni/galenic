@@ -24,4 +24,5 @@ export type ContainerDetailType = {
   photo: string
   contour: string
   shape: string
+  keywords: string[]
 }

@@ -2,6 +2,7 @@ import React from 'react'
 import {
   Button,
   Checkbox,
+  Chip,
   Divider,
   FormControl,
   FormControlLabel,
@@ -53,6 +54,8 @@ export const FormAction = ({
 }: FormActionProps) => {
   const [searchParams] = useSearchParams()
   const forcedName = searchParams.get('forcedName')
+  const [addKeyword, setAddKeyword] = React.useState<string>('')
+  const [keywordErrors, setKeywordErrors] = React.useState<string[]>([])
 
   const onSubmit = async (
     values: ActionDetailType,
@@ -162,6 +165,7 @@ export const FormAction = ({
         speed: dataAction?.speed || 1,
         tool: dataAction?.tool || '',
         robot: null,
+        keywords: dataAction?.keywords || [],
       }}
       validationSchema={YupObject().shape({
         name: YupString()
@@ -244,12 +248,12 @@ export const FormAction = ({
               <Stack spacing={1}>
                 <TextField
                   id="add_keyword"
-                  value=""
+                  value={addKeyword}
                   name="add_keyword"
                   label="Add keyword"
                   title="You can define keywords for this grid to be used as synonyms during the chat"
-                  // onChange={(e) => setAddKeyword(e.target.value)}
-                  /*                   onKeyDown={(e) => {
+                  onChange={(e) => setAddKeyword(e.target.value)}
+                  onKeyDown={(e) => {
                     if (e.key === 'Enter') {
                       if (addKeyword) {
                         const newKeywords = [...values.keywords]
@@ -258,12 +262,12 @@ export const FormAction = ({
                         setAddKeyword('')
                       }
                     }
-                  }} */
+                  }}
                   InputProps={{
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          /*                           onClick={() => {
+                          onClick={() => {
                             if (addKeyword) {
                               const newKeywords = [...values.keywords]
                               newKeywords.push(addKeyword)
@@ -273,7 +277,7 @@ export const FormAction = ({
                           }}
                           disabled={
                             !addKeyword || values.keywords.includes(addKeyword)
-                          } */
+                          }
                           edge="end"
                         >
                           <PlusOutlined />
@@ -282,6 +286,30 @@ export const FormAction = ({
                     ),
                   }}
                 />
+              </Stack>
+            </Grid>
+            <Grid item xs={4}>
+              <Stack spacing={1} direction="row">
+                {values.keywords.map((keyword, index) => (
+                  <Chip
+                    key={keyword}
+                    label={keyword}
+                    variant="outlined"
+                    onDelete={() => {
+                      const newKeywords = [...values.keywords]
+                      newKeywords.splice(index, 1)
+                      setFieldValue('keywords', newKeywords)
+
+                      const newKeywordErrors = keywordErrors.filter(
+                        (keywordError) => keywordError !== keyword,
+                      )
+                      setKeywordErrors(newKeywordErrors)
+                    }}
+                    color={
+                      keywordErrors.includes(keyword) ? 'error' : 'primary'
+                    }
+                  />
+                ))}
               </Stack>
             </Grid>
             <Grid item xs={12}>
